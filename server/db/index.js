@@ -1,5 +1,11 @@
 var mysql = require('mysql2');
 
+const connection = mysql.createConnection({
+  host: 'localhost:3000',
+  user: 'root',
+  database: 'chat'
+});
+
 // Create a database connection and export it from this file.
 // Confirm that the credentials supplied for the connection are correct.
 // On Campus at pairing stations you'll use
@@ -8,5 +14,7 @@ var mysql = require('mysql2');
 // user: 'root', password: ''
 // OR
 // user: 'root', password: 'some_password_you_created_at_install'
+
+exports.connection = connection;
 
 
