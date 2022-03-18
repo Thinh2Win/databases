@@ -4,28 +4,27 @@ USE chat;
 
 CREATE TABLE users (
 
-  user_id int NOT NULL AUTO_INCREMENT,
-  username varchar(10),
-  PRIMARY KEY(user_id)
+  id int NOT NULL PRIMARY AUTO_INCREMENT,
+  username varchar(25) NOT NULL,
 );
 
-CREATE TABLE roomName (
-
-  room_id int NOT NULL AUTO_INCREMENT,
-  _name varchar(10),
-  PRIMARY KEY(room_id)
+CREATE TABLE rooms(
+  id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  room_name varchar(20) NOT NULL,
 );
+-- if we were to create a friends table we would make it an associative table where id's from users table would point back to the users id. We can have 2 foreign keys.
+-- ex: FOREIGN KEY(from_user) REFERENCES users(id),
+--      FOREIGN KEY(to_user) REFERENCES users(id),
 
 CREATE TABLE messages (
   /* Describe your table here.*/
-  id int NOT NULL AUTO_INCREMENT,
-  txt varchar(25),
-  stamp timestamp,
-  user_id int,
-  room_id int,
-  PRIMARY KEY(id),
-  FOREIGN KEY(user_id) REFERENCES users(user_id),
-  FOREIGN KEY(room_id) REFERENCES roomName(room_id)
+  id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  txt varchar(50) NOT NULL,
+  ts DATETIME DEFAULT CURRENT_TIMESTAMP,
+  user_id int NOT NULL,
+  room_id int NOT NULL,
+  FOREIGN KEY(user_id) REFERENCES users(id),
+  FOREIGN KEY(room_id) REFERENCES rooms(id)
 );
 
 -- NSERT INTO table_name (column1, column2, column3, ...)
